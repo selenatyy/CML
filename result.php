@@ -16,6 +16,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style> 
+
+    /* Start of Navbar */
+    img {
+        margin-left: 45px;
+    }
+
+    .logo-name {
+        font-size: 15px;
+    }
+
+    .form-button{
+        background-color: #93A3BC;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        padding: 6px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    /* End of Navbar */
     .tab {
         overflow: hidden;
         border: 1px solid #ccc;
@@ -61,6 +85,22 @@
 </head>
 
 <body>
+    <!-- Start of Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">
+            <img src="img/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                <div class="logo-name"> 
+                    Coffee Meets Legal
+                </div>
+            </a>
+            <a href="form.php">
+                <button class="form-button">Case Form</button>
+            </a>
+            </div>
+        </div>
+    </nav>
+<!-- End of Navbar -->
     <div class="tab">
         <button class="tablinks" onclick="clickHandle(event, 'Info')">Case Info</button>
         <button class="tablinks" onclick="clickHandle(event, 'Lawyers')">Recommended Lawyers</button>
