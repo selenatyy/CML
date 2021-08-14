@@ -117,7 +117,7 @@
 <!-- Start of Search Bar -->
     <div class="wrap">
         <form class="search" action="result.php">
-            <input type="text" class="searchTerm" placeholder="Please enter your Case ID">
+            <input type="text" class="searchTerm" name="case_id" placeholder="Please enter your Case ID">
             <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
             </button>

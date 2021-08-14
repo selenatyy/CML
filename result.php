@@ -107,11 +107,74 @@
     </div>
 
     <div id="Info" class="tabcontent">
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+    <?php $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "cml";
+            $case_id = $_REQUEST["case_id"];
+            
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            
+            // Check connection
+            if($conn === false) {
+                die("ERROR: Could not connect. " 
+                    . mysqli_connect_error());
+            }
+            // $sql = "select la_id from case_legal_areas where case_num = '$case_id';";
+            $sql = "select * from caseentry where case_num = '$case_id';";
+           
+            $result = $conn->query($sql);
+            if ($result !== false && $result-> num_rows > 0) {
+                $row = $result->fetch_assoc();
+                echo "<h5>Facts:</h5> " . $row["facts"]. " <br><br> <h5>Advice:</h5> " . $row["advice"]. " " . "<br><br><h5>Email:</h5>" . $row["client_email"]. "<br>";
+                  
+            } else {
+                  echo "<br> 0 results";
+            }
+            
+        
+    ?>
     </div>
 
     <div id="Lawyers" class="tabcontent">
-        <h3>Lawyer 1</h3>
+        <?php $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "cml";
+            $case_id = $_REQUEST["case_id"];
+            
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            
+            // Check connection
+            if($conn === false) {
+                die("ERROR: Could not connect. " 
+                    . mysqli_connect_error());
+            }
+            // $sql = "select la_id from case_legal_areas where case_num = '$case_id';";
+            $sql = "select * from lawyer where lawyer_id in 
+            (select lawyer_id from lawyer_legal_areas where la_id in (select la_id from case_legal_areas where case_num = '$case_id'    ));";
+           
+            $result = $conn->query($sql);
+            if ($result !== false && $result-> num_rows > 0) {
+                echo "<table>";
+                while($row = $result->fetch_assoc()) {
+                    echo "<h5>ID: " . $row["lawyer_id"]. " - Name: " . $row["lawyer_name"]. " " . $row["lawyer_email"]. "</h5>"
+                    ."<form  action = \"https://formsubmit.co/bryan.tzy@yahoo.com\"; method=&quot;post&quot > <div class='btn-block'> <button type='submit' formmethod=&quot;post&quot; name='token' value='$case_id' href='/'>Share Case Info</button>"
+                    ."</div> </form>"
+                    ."<br>";
+                    
+                  }
+                echo "</table>";
+                
+            } else {
+                  echo "<br> 0 results";
+            }
+            
+        
+    ?>
+        <!-- <h3>Lawyer 1</h3> -->
     </div>
 
     <script>
