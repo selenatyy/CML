@@ -128,12 +128,9 @@
             if ($result !== false && $result-> num_rows > 0) {
                 $row = $result->fetch_assoc();
                 echo "<h5>Facts:</h5> " . $row["facts"]. " <br><br> <h5>Advice:</h5> " . $row["advice"]. " " . "<br><br><h5>Email:</h5>" . $row["client_email"]. "<br>";
-                  
             } else {
                   echo "<br> 0 results";
             }
-            
-        
     ?>
     </div>
 
@@ -143,7 +140,6 @@
             $password = "";
             $dbname = "cml";
             $case_id = $_REQUEST["case_id"];
-            
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
             
@@ -158,23 +154,19 @@
            
             $result = $conn->query($sql);
             if ($result !== false && $result-> num_rows > 0) {
-                echo "<table>";
                 while($row = $result->fetch_assoc()) {
-                    echo "<h5>ID: " . $row["lawyer_id"]. " - Name: " . $row["lawyer_name"]. " " . $row["lawyer_email"]. "</h5>"
-                    ."<form  action = \"https://formsubmit.co/bryan.tzy@yahoo.com\"; method=&quot;post&quot > <div class='btn-block'> <button type='submit' formmethod=&quot;post&quot; name='token' value='$case_id' href='/'>Share Case Info</button>"
-                    ."</div> </form>"
-                    ."<br>";
-                    
+                    echo "<h5 >Name: </h5> " . $row["lawyer_name"]. "<h5>Email:</h5>" . $row["lawyer_email"]. "</h5>"
+                    ."<h5>Description:</h5> " . $row["lawyer_description"]
+                    ."<form  action = 'https://formsubmit.co/". $row["lawyer_email"] . "' method='post'> <div class='btn-block'>" 
+                        ."<input type='hidden' name='_subject' value='New case note!'>"
+                        ."<input type='hidden' name='Notification' value='Dear " . $row["lawyer_name"].", a prospect on Coffee Meets Legal has expressed interest in your services and" 
+                        ."would like to share case information with you. Use this token on Coffee Meets Legal to access the case note.'>"
+                        ."<button type='submit' formmethod='post' name='Token' value='$case_id' href='/'>Share Case Details</button>"
+                    ."</div> </form><br><br>";
                   }
-                echo "</table>";
-                
-            } else {
-                  echo "<br> 0 results";
+            } else {    
             }
-            
-        
     ?>
-        <!-- <h3>Lawyer 1</h3> -->
     </div>
 
     <script>
