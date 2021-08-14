@@ -1,0 +1,11 @@
+How to test/use:
+
+Requirements - php, Mysql
+
+1. Download all .php files and create.sql. All .php files should be in the same folder
+
+2. Run create.sql and check that the CML database is created with the sample entries.
+
+3. With MySQL server running, open index.php (or navigate to /localhost/...index.php in browser)
+
+4. The portal can be used.
